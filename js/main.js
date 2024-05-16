@@ -49,6 +49,11 @@ function getFetch()
             document.querySelector("p").innerText = data.explanation;
         })
         .catch(err => {
+            document.querySelector("#options").classList.add("hide");
+            document.querySelector("#date").classList.add("hide");
+            document.querySelector("img").classList.add("hide");
+            document.querySelector("iframe").classList.add("hide");
+            document.querySelector("iframe").style.height = "0px";
             document.getElementById("error").classList.remove("hide");
             console.log(`error ${err}`)
         });
