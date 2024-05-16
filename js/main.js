@@ -26,12 +26,14 @@ function getFetch()
     const choice = document.querySelector("#date").value.toLowerCase();
     const url = `https://api.nasa.gov/planetary/apod?api_key=ObdEBTvaVIHVkPcwQ2DgSiCvneYh6t0QNZu2gTNd&date=${choice}`;
     const options = {
-        method : "GET"
+        method : "GET",
+        signal: AbortSignal.timeout(5000)
     }
 
     fetch(url, options)
         .then(response => response.json())
         .then(data => {
+            console.log(data);
             if (data.media_type == "image")
             {
                 document.querySelector("iframe").classList.add("hide");
@@ -47,6 +49,7 @@ function getFetch()
             document.querySelector("p").innerText = data.explanation;
         })
         .catch(err => {
+            document.getElementById("error").classList.remove("hide");
             console.log(`error ${err}`)
         });
 }
