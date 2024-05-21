@@ -39,12 +39,22 @@ function getFetch()
                 document.querySelector("iframe").classList.add("hide");
                 document.querySelector("img").classList.remove("hide");
                 document.querySelector("img").src = data.hdurl;
+
+                document.querySelector("img").onload = async function(){
+                    await new Promise(resolve => setTimeout(resolve, 2000));
+                    requestAnimationFrame(document.querySelector("#form").scrollIntoView({behavior: "smooth"}));
+                }
             }
             else
             {
                 document.querySelector("img").classList.add("hide");
                 document.querySelector("iframe").classList.remove("hide");
                 document.querySelector("iframe").src = data.url;
+
+                document.querySelector("iframe").onload = async function(){
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+                    requestAnimationFrame(document.querySelector("#form").scrollIntoView({behavior: "smooth"}));
+                }
             }
             document.querySelector("p").innerText = data.explanation;
         })
@@ -64,4 +74,5 @@ function toggleOptions(){
     document.querySelectorAll(".show").forEach(element =>{
         element.classList.toggle("hide");
     });
+    document.querySelector("#form").scrollIntoView({behavior: "smooth"})
 }
